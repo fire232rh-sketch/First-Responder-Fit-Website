@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Responder Fit - Functional Fitness for First Responders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    :root {
+        --primary-red: #DC143C;
+        --dark-bg: #0a0e27;
+        --dark-card: #1a1f3a;
+        --text-light: #f5f5f5;
+        --text-muted: #a0aec0;
+        --accent-blue: #4a90e2;
+        --accent-gold: #f4a460;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #0f1432 100%);
+        color: var(--text-light);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* Header & Navigation */
+    header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(10, 14, 39, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(220, 20, 60, 0.2);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 3rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .logo {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-red), var(--accent-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 2px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-red);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    .cta-btn {
+        background: var(--primary-red);
+        color: white;
+        padding: 0.7rem 1.8rem;
+        border-radius: 4px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(220, 20, 60, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 3rem 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(220, 20, 60, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-30px); }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        max-width: 900px;
+        animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .hero h1 {
+        font-size: 4.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+        background: linear-gradient(135deg, var(--primary-red), var(--accent-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background: var(--primary-red);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(220, 20, 60, 0.4);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: var(--text-light);
+        border: 2px solid var(--primary-red);
+    }
+
+    .btn-secondary:hover {
+        background: var(--primary-red);
+        box-shadow: 0 15px 35px rgba(220, 20, 60, 0.3);
+    }
+
+    /* Sections */
+    section {
+        padding: 5rem 3rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 3rem;
+        text-align: center;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: var(--primary-red);
+    }
+
+    /* About Section */
+    .about {
+        background: rgba(26, 31, 58, 0.5);
+        border-radius: 12px;
+        padding: 3rem;
+    }
+
+    .mission-statement {
+        background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(74, 144, 226, 0.1));
+        border-left: 4px solid var(--primary-red);
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        font-size: 1.2rem;
+        font-style: italic;
+        font-weight: 500;
+    }
+
+    /* Trainer Bio */
+    .trainer-bio {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
+
+    .trainer-text h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary-red);
+    }
+
+    .trainer-text p {
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        line-height: 1.8;
+    }
+
+    .trainer-image {
+        width: 100%;
+        height: 400px;
+        background: linear-gradient(135deg, rgba(220, 20, 60, 0.2), rgba(74, 144, 226, 0.2));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed var(--primary-red);
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    /* Schedule Section */
+    .schedule-container {
+        background: rgba(26, 31, 58, 0.5);
+        border-radius: 12px;
+        padding: 3rem;
+    }
+
+    .schedule-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .schedule-card {
+        background: var(--dark-card);
+        padding: 2rem;
+        border-radius: 8px;
+        border-top: 3px solid var(--primary-red);
+        text-align: center;
+    }
+
+    .schedule-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-light);
+    }
+
+    .schedule-card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+    }
+
+    .schedule-card .highlight {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-red);
+        margin: 1rem 0;
+    }
+
+    .schedule-table {
+        width: 100%;
+        background: var(--dark-card);
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(220, 20, 60, 0.2);
+    }
+
+    .schedule-table h5 {
+        padding: 1.5rem;
+        background: rgba(220, 20, 60, 0.1);
+        border-bottom: 1px solid rgba(220, 20, 60, 0.2);
+        font-size: 1.1rem;
+    }
+
+    .schedule-table ul {
+        list-style: none;
+        padding: 1.5rem;
+        color: var(--text-muted);
+    }
+
+    .schedule-table li {
+        padding: 0.75rem 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .schedule-table li::before {
+        content: '✓';
+        color: var(--primary-red);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    /* Contact Section */
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+
+    .contact-info {
+        background: var(--dark-card);
+        padding: 2.5rem;
+        border-radius: 12px;
+    }
+
+    .contact-info h4 {
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+        color: var(--primary-red);
+    }
+
+    .contact-method {
+        margin-bottom: 2rem;
+    }
+
+    .contact-method label {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-method p {
+        font-size: 1.3rem;
+        color: var(--text-light);
+        font-weight: 600;
+    }
+
+    .contact-method a {
+        color: var(--primary-red);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-method a:hover {
+        color: var(--accent-gold);
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .social-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        background: rgba(220, 20, 60, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-red);
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(220, 20, 60, 0.3);
+    }
+
+    .social-icon:hover {
+        background: var(--primary-red);
+        color: white;
+        transform: translateY(-5px);
+    }
+
+    .contact-form {
+        background: var(--dark-card);
+        padding: 2.5rem;
+        border-radius: 12px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-light);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(10, 14, 39, 0.5);
+        border: 1px solid rgba(220, 20, 60, 0.3);
+        border-radius: 6px;
+        color: var(--text-light);
+        font-family: 'Poppins', sans-serif;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-red);
+        background: rgba(10, 14, 39, 0.8);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary-red);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(220, 20, 60, 0.4);
+    }
+
+    /* Footer */
+    footer {
+        background: rgba(10, 14, 39, 0.8);
+        border-top: 1px solid rgba(220, 20, 60, 0.2);
+        padding: 2rem 3rem;
+        text-align: center;
+        color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+
+        .trainer-bio,
+        .contact-container,
+        .schedule-info {
+            grid-template-columns: 1fr;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        nav {
+            padding: 1rem;
+        }
+
+        section {
+            padding: 3rem 1rem;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <div class="logo">FRF</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#trainer">Trainer</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Join Now</button>
+        </nav>
+    </header>
+
+```
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Destroy <span>"I Can't"</span></h1>
+        <p class="hero-subtitle">Functional fitness designed for first responders. Build mental strength, physical resilience, and unbreakable discipline.</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="document.getElementById('schedule').scrollIntoView({behavior: 'smooth'})">View Schedule</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <h2 class="section-title">About First Responder Fit</h2>
+    <div class="about">
+        <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.8;">
+            First Responder Fit is a specialized training program built by first responders, for first responders. We understand the unique physical and mental demands of your profession. Our classes combine functional fitness with mental resilience training to create well-rounded athletes prepared for anything.
+        </p>
+        
+        <div class="mission-statement">
+            <strong>Our Mission:</strong> Destroy "I can't" by strengthening one's mind and building good discipline, while using fitness as a tool to do so.
+        </div>
+
+        <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8;">
+            Every class is designed to challenge you physically while forging mental toughness. All fitness levels are welcome. All judgment and excuses are left at the door. You'll leave stronger, more disciplined, and genuinely transformed.
+        </p>
+    </div>
+</section>
+
+<!-- Trainer Section -->
+<section id="trainer">
+    <h2 class="section-title">Meet Your Trainer</h2>
+    <div class="trainer-bio">
+        <div class="trainer-text">
+            <h3>Travis Gelineau</h3>
+            <p>
+                Travis brings years of professional firefighting experience to every class. With a proven track record of working with first responders at all fitness levels—from advanced athletes to those just getting back into the gym—Travis has developed a unique functional fitness approach that delivers real results, both physically and mentally.
+            </p>
+            <p>
+                His background in high-stress emergency response gives him deep insight into the mental and physical challenges first responders face. This isn't theoretical training—it's built on lived experience and real-world application.
+            </p>
+            <p>
+                Travis's coaching philosophy centers on breaking through mental barriers and building unshakeable discipline. He's dedicated to helping you become the strongest version of yourself.
+            </p>
+        </div>
+        <div class="trainer-image">
+            Trainer Photo Space
+        </div>
+    </div>
+</section>
+
+<!-- Schedule Section -->
+<section id="schedule">
+    <h2 class="section-title">Class Schedule & Pricing</h2>
+    <div class="schedule-container">
+        <div class="schedule-info">
+            <div class="schedule-card">
+                <h4>Class Days</h4>
+                <p>Every Third Night</p>
+                <div class="highlight">3x/Month</div>
+                <p style="font-size: 0.85rem;">Minimum 10 classes guaranteed</p>
+            </div>
+            <div class="schedule-card">
+                <h4>Class Time</h4>
+                <p>Evening Training</p>
+                <div class="highlight">6:00 PM</div>
+                <p style="font-size: 0.85rem;">Sharp start, consistent schedule</p>
+            </div>
+            <div class="schedule-card">
+                <h4>Monthly Investment</h4>
+                <p>Complete Package</p>
+                <div class="highlight">$150</div>
+                <p style="font-size: 0.85rem;">+ 24/7 BL Gym membership</p>
+            </div>
+        </div>
+
+        <div class="schedule-table">
+            <h5>What's Included in Your Monthly Membership</h5>
+            <ul>
+                <li>Unlimited access to 3+ classes per month (minimum 10 classes/month guaranteed)</li>
+                <li>24/7 access to BL Gym in Batesburg</li>
+                <li>Personalized makeup workouts if you miss a class</li>
+                <li>Group training with like-minded first responders</li>
+                <li>Mental strength and discipline coaching</li>
+                <li>Functional fitness program designed by a firefighter, for first responders</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(220, 20, 60, 0.1); border-radius: 8px; border-left: 4px solid var(--primary-red);">
+            <p style="color: var(--text-muted);">
+                <strong>Location:</strong> BL Gym, Batesburg<br>
+                Classes are referred to as "shifts" and foster a tight-knit community of first responders dedicated to personal excellence.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <h2 class="section-title">Get Started Today</h2>
+    <div class="contact-container">
+        <div class="contact-info">
+            <h4>Contact Information</h4>
+            
+            <div class="contact-method">
+                <label>Phone</label>
+                <p><a href="tel:4015986104">401-598-6104</a></p>
+            </div>
+
+            <div class="contact-method">
+                <label>Trainer</label>
+                <p>Travis Gelineau</p>
+            </div>
+
+            <div class="contact-method">
+                <label>Location</label>
+                <p>BL Gym<br>Batesburg</p>
+            </div>
+
+            <div class="contact-method">
+                <label>Class Schedule</label>
+                <p>Every Third Night at 6:00 PM</p>
+            </div>
+
+            <div class="contact-method">
+                <label>Follow Us</label>
+                <div class="social-links">
+                    <a href="#" class="social-icon" title="Instagram">📱</a>
+                    <a href="#" class="social-icon" title="Facebook">f</a>
+                    <a href="#" class="social-icon" title="TikTok">▶</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h4 style="margin-bottom: 1.5rem;">Send us a Message</h4>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="Tell us about yourself and what brings you to First Responder Fit..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 First Responder Fit. All rights reserved. Built for strength, discipline, and excellence.</p>
+</footer>
+
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        alert('Thank you for your message! Travis will get back to you soon at ' + document.getElementById('phone').value || document.getElementById('email').value);
+        event.target.reset();
+    }
+</script>
+```
+
+</body>
+</html>
